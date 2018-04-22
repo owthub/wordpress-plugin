@@ -1,5 +1,46 @@
 jQuery(document).ready(function() {
 
+    // Enrol Code
+    jQuery(document).on("click",".owt-enrol-btn",function(){
+        console.log("Enrolled Successfully");
+    });
+
+     jQuery("#frmAddStudent").validate({
+       submitHandler: function() {
+            var postdata = "action=mybooklibrary&param=save_student&" + jQuery("#frmAddStudent").serialize();
+            jQuery.post(mybookajaxurl, postdata, function(response) {
+                var data = jQuery.parseJSON(response);
+                if (data.status == 1) {
+                    jQuery.notifyBar({
+                        cssClass: "success",
+                        html: data.message
+                    });
+                } else {
+
+                }
+            });
+        }
+   });
+
+
+   jQuery("#frmAddAuthor").validate({
+       submitHandler: function() {
+            var postdata = "action=mybooklibrary&param=save_author&" + jQuery("#frmAddAuthor").serialize();
+            jQuery.post(mybookajaxurl, postdata, function(response) {
+                var data = jQuery.parseJSON(response);
+                if (data.status == 1) {
+                    jQuery.notifyBar({
+                        cssClass: "success",
+                        html: data.message
+                    });
+                } else {
+
+                }
+            });
+        }
+   });
+
+
     jQuery("#btn-upload").on("click", function() {
         var image = wp.media({
             title: "Upload Image for My Book",

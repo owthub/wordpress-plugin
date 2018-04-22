@@ -19,7 +19,28 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="author">Author:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" required id="author" name="author" placeholder="Enter Author">
+                           <select name="author" id="author" class="form-control">
+                           <option value="-1"> -- choose author --</option>
+                           <?php
+
+global $wpdb;
+
+$getallAuthors = $wpdb->get_results(
+
+    $wpdb->prepare(
+        "SELECT * from ".my_authors_table()." ORDER by id desc ",""
+        )
+
+);
+
+foreach($getallAuthors as $index=>$author){
+    ?>
+<option value="<?php echo $author->id; ?>"><?php echo $author->name; ?></option>
+    <?php
+}
+                           ?>
+                              
+                           </select>
                         </div>
                     </div>
 
